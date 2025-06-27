@@ -157,13 +157,40 @@ export default function Home() {
 
   // Check all servers on component mount
   useEffect(() => {
-    vpnLocations.forEach((location) => {
+    const locations = [
+      {
+        name: "India",
+        country: "🇮🇳",
+        icon: MapPin,
+        url: "https://vpn.in.omshejul.com/",
+        description: "Connect to Mumbai",
+        serverId: "in",
+      },
+      {
+        name: "United States",
+        country: "🇺🇸",
+        icon: Shield,
+        url: "https://vpn.us.omshejul.com/",
+        description: "Connect to New Jersey",
+        serverId: "us",
+      },
+      {
+        name: "European Union",
+        country: "🇪🇺",
+        icon: Globe,
+        url: "https://vpn.eu.omshejul.com/",
+        description: "Connect to Germany",
+        serverId: "eu",
+      },
+    ];
+
+    locations.forEach((location) => {
       checkServerStatus(location.url, location.serverId);
     });
 
     // Refresh status every 5 seconds
     const interval = setInterval(() => {
-      vpnLocations.forEach((location) => {
+      locations.forEach((location) => {
         checkServerStatus(location.url, location.serverId);
       });
     }, 5000);
