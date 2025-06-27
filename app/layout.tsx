@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   keywords:
     "VPN, secure internet, privacy, encryption, WireGuard, India VPN, USA VPN, EU VPN, fast VPN, secure connection",
   authors: [{ name: "SecureVPN" }],
-  viewport: "width=device-width, initial-scale=1",
+
   robots: "index, follow",
   openGraph: {
     title: "SecureVPN - Global VPN Servers",
@@ -43,6 +43,8 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
 };
+
+export const viewport = "width=device-width, initial-scale=1";
 
 export default function RootLayout({
   children,
