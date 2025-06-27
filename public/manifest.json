@@ -1,0 +1,25 @@
+{
+  "name": "SecureVPN - Global VPN Servers",
+  "short_name": "SecureVPN",
+  "description": "Secure, fast VPN servers across India, USA, and Europe",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f97316",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["security", "utilities", "productivity"],
+  "screenshots": []
+}

@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Globe, MapPin, Shield, Zap, ArrowRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export default function Home() {
   const [serverStatus, setServerStatus] = useState<
@@ -89,7 +89,7 @@ export default function Home() {
       const pingTime = Math.round(endTime - startTime);
 
       return { online: true, pingTime };
-    } catch (error) {
+    } catch {
       // Even if CORS blocks the request, we can measure the time to connection attempt
       try {
         const startTime = performance.now();
@@ -105,27 +105,30 @@ export default function Home() {
   };
 
   // Function to check server status with single ping
-  const checkServerStatus = async (url: string, serverId: string) => {
-    const pingResult = await pingServer(url);
+  const checkServerStatus = useCallback(
+    async (url: string, serverId: string) => {
+      const pingResult = await pingServer(url);
 
-    if (pingResult.online) {
-      setServerStatus((prev) => ({
-        ...prev,
-        [serverId]: {
-          online: true,
-          ping: `${pingResult.pingTime}ms`,
-        },
-      }));
-    } else {
-      setServerStatus((prev) => ({
-        ...prev,
-        [serverId]: {
-          online: false,
-          ping: "Offline",
-        },
-      }));
-    }
-  };
+      if (pingResult.online) {
+        setServerStatus((prev) => ({
+          ...prev,
+          [serverId]: {
+            online: true,
+            ping: `${pingResult.pingTime}ms`,
+          },
+        }));
+      } else {
+        setServerStatus((prev) => ({
+          ...prev,
+          [serverId]: {
+            online: false,
+            ping: "Offline",
+          },
+        }));
+      }
+    },
+    []
+  );
 
   // Check if device is mobile and track mouse position
   useEffect(() => {
@@ -166,7 +169,7 @@ export default function Home() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [checkServerStatus]);
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
@@ -357,8 +360,7 @@ export default function Home() {
             className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-16"
             variants={itemVariants}
           >
-            {vpnLocations.map((location, index) => {
-              const IconComponent = location.icon;
+            {vpnLocations.map((location) => {
               const status = serverStatus[location.serverId];
               const isOnline = status?.online ?? false;
               const pingTime = status?.ping ?? "Checking...";

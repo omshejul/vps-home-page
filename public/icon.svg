@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Orange Background with Border -->
+  <rect x="2" y="2" width="28" height="28" rx="6" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
+  
+  <!-- Shield Icon (Feather Icons style) -->
+  <path d="M16 6L22 10V16C22 20 16 25 16 25S10 20 10 16V10L16 6Z" 
+        fill="none" 
+        stroke="white" 
+        stroke-width="2.5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+</svg> 
